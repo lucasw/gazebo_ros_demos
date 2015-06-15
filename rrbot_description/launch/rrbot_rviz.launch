@@ -1,8 +1,6 @@
 <launch>
 
-  <!--group ns="mybot">
-  -->
-  <group>
+  <group ns="mybot">
   <param name="robot_description"
     command="$(find xacro)/xacro.py '$(find rrbot_description)/urdf/rrbot.xacro'" />
 
