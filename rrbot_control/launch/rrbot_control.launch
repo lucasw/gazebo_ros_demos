@@ -1,7 +1,7 @@
+<?xml version="1.0"?>
 <launch>
 
   <!--
-  
   So far putting this in a namespace doesn't work:
 
 [INFO] /opt/ros/indigo/lib/controller_manager/spawner:121 : Controller Spawner: Waiting for service controller_manager/load_controller
@@ -17,6 +17,8 @@
 [INFO] /opt/ros/indigo/lib/controller_manager/spawner:206 : Started controllers: 
 
   -->
+
+  
   <group ns="mybot">
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find rrbot_control)/config/rrbot_control.yaml" command="load"/>
@@ -27,10 +29,13 @@
 					  joint1_position_controller
 					  joint2_position_controller"/>
 
+  <!-- group -->
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
 	respawn="false" output="screen">
-    <remap from="/joint_states" to="rrbot/joint_states" />
+    <remap from="joint_states" to="rrbot/joint_states" />
+    <remap from="robot_description" to="robot_description" />
+
   </node>
   </group> <!-- mybot -->
 
