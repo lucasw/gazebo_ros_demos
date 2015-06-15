@@ -1,4 +1,8 @@
 <launch>
+
+  <!--group ns="mybot">
+  -->
+  <group>
   <param name="robot_description"
     command="$(find xacro)/xacro.py '$(find rrbot_description)/urdf/rrbot.xacro'" />
 
@@ -12,5 +16,7 @@
 
   <!-- Show in Rviz   -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rrbot_description)/launch/rrbot.rviz"/>
+
+  </group> <!-- mybot -->
 
 </launch>
