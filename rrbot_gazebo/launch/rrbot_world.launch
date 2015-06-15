@@ -7,7 +7,17 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
+  <!--
+    Putting this here makes some things not launch properly:
+    
+    [ INFO] /tmp/buildd/ros-indigo-roscpp-1.11.13-0trusty-20150522-1157/src/libros/service.cpp:80 : waitForService: Service [/gazebo/set_physics_properties] has not been advertised, waiting...
+    ...
+    [INFO] /opt/ros/indigo/lib/gazebo_ros/spawn_model:229 : Loading model xml from ros parameter
+    [INFO] /opt/ros/indigo/lib/python2.7/dist-packages/gazebo_ros/gazebo_interface.py:27 : Waiting for service /gazebo/spawn_urdf_model
+  -->
+  <!--
   <group ns="mybot">
+  -->
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -19,7 +29,16 @@
     <arg name="headless" value="$(arg headless)"/>
   </include>
 
-  
+  <!--
+    The gazebo screen comes up all black when I put this here
+    
+    [ INFO] /tmp/buildd/ros-indigo-gazebo-ros-control-2.4.8-0trusty-20150523-0916/src/gazebo_ros_control_plugin.cpp:152 : Starting gazebo_ros_control plugin in namespace: rrbot
+    [ INFO] /tmp/buildd/ros-indigo-gazebo-ros-control-2.4.8-0trusty-20150523-0916/src/gazebo_ros_control_plugin.cpp:274 : gazebo_ros_control plugin is waiting for model URDF in parameter [robot_description] on the ROS param server
+    
+    The camera image topic exists but doesn't get published.
+  -->
+  <group ns="mybot">
+
   <!-- Load the URDF into the ROS Parameter Server -->
   <param name="robot_description"
 	 command="$(find xacro)/xacro.py '$(find rrbot_description)/urdf/rrbot.xacro'" />
